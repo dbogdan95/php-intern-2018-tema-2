@@ -12,7 +12,5 @@
 */
 
 Route::get('/', function () {  
-    echo DB::table("employees")->get();
-
-    //return view('welcome');
+    return view('index');
 });
