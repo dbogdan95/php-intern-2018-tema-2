@@ -14,12 +14,22 @@ class CreateCompaniesTable extends Migration
     public function up()
     {
         Schema::create('companies', function (Blueprint $table) {
-            $table->increments('id');
-		    $table->string('name', 32);
-		    $table->text('description');
+            $table->increments('id')->unsigned();
+		    $table->string('name', 64);
+		    $table->string('description', 128)->nullable()->default("NULL");
 		
 		    $table->timestamps();
         });
+
+
+         // Insert some stuff
+        DB::table('companies')->insert(
+            array(
+                'name' => 'dummy'
+            )
+        ); 
+
+        DB::statement("UPDATE companies SET id = 0 WHERE name = 'dummy'");      
     }
 
     /**
